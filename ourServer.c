@@ -6,20 +6,36 @@
 #include <sys/socket.h> 
 #include <sys/types.h> 
 #include <unistd.h>
+#include "ebadf.h"
 #define PORT 23423 
 #define SIZE 1024
 #define SA struct sockaddr 
   
 // Function designed for chat between client and server. 
 void challenge1(int sockfd); 
+void challenge2(int sockfd);
+void challenge2bis(int sockfd);
+void challenge3(int sockfd); 
+void challenge4(int sockfd);
+void challenge5(int sockfd);
+void challenge6(int sockfd);
+void mixedfds(int sockfd); 
+void ebadf(int sockfd);
 void challengex(int sockfd);
+char * data = ".data";
+char * bss = ".bss";
+char * comment = ".comment";
+char * runme = ".runme";
+char * shstrtab = ".shstrtab";
+char * symtab = ".symtab";
+char * strtab = ".strtab";
 
 void func(int sockfd) 
 { 
     char * buff = malloc(1024);
-    int n; 
+    int n, i; 
     // infinite loop for chat 
-    for(int i =0;i<12;i++){ 
+    for(i =0;i<12;i++){ 
         //clear buffer
         bzero(buff, SIZE); 
   
@@ -112,37 +128,254 @@ void challenge1(int sockfd)
     // infinite loop for chat 
         while(1){ 
         //clear buffer
+            system("clear");
             printf("Bienvenidos al Himalaya, pone \"entendido\\n\" porque se pudre\n" ); 
         bzero(buff, SIZE); 
         
         // read the message from client and copy it in buffer 
         int last = recv(sockfd, buff, SIZE,0);
-     
-        printf("%s\n", buff);
+        //printf("%s\n", buff);
 
         // print buffer which contains the client contents 
         
         if(strcmp(buff,"entendido\n") == 0){
             printf("Bien, sabes escribir\n");
-            challengex(sockfd);
+            challenge2bis(sockfd);
             break;
         }
         else{
             printf("Que se siente que tus papas sean primos?\n");
             sleep(1);
-            system("clear");
         }
-
-
     } 
-
-
 } 
 
+void challenge2bis(int sockfd){
+    char * buff = malloc(1024);
+    
+    while(1){ 
+        system("clear");
+        printf("--- DESAFIO ---\n");
+        char * str = "# [D \033[A \033[A \033[D \033[B \033[C \033[B \033[D *\n";
+        printf(str);
+        bzero(buff, SIZE); 
+        
+        // read the message from client and copy it in buffer 
+        int last = recv(sockfd, buff, SIZE, 0);
+
+        // print buffer which contains the client contents 
+        //printf("%s\n", buff);
+        
+        if(strcmp(buff,"#0854780*\n") == 0){
+            printf("Respuesta correcta: %s\n", buff);
+            sleep(1);
+            challenge2(sockfd);
+            break;
+        }
+        else{
+            printf("Respuesta incorrecta: %s\n", buff);
+            sleep(1);
+            system("clear");
+        }
+    }
+}
+
+void challenge2(int sockfd){
+    char * buff = malloc(1024);
+    
+    while(1){
+        system("clear"); 
+        printf("--- DESAFIO ---\n");
+        printf("https://vocaroo.com/i/s19015zmR4t8\n");
+        bzero(buff, SIZE); 
+        
+        // read the message from client and copy it in buffer 
+        int last = recv(sockfd, buff, SIZE, 0);
+
+        // print buffer which contains the client contents 
+        //printf("%s\n", buff);
+        
+        if(strcmp(buff,"nokia\n") == 0){
+            printf("Respuesta correcta: %s\n", buff);
+            sleep(1);
+            ebadf(sockfd);
+            break;
+        }
+        else{
+            printf("Respuesta incorrecta: %s\n", buff);
+            sleep(1);
+            system("clear");
+        }
+    }
+}
+
+void ebadf(int sockfd){
+    char * str = "easter_egg";
+    char * buff = malloc(1024);
+    write(5, "cabeza de calabaza\n", 20);
+    
+    while(1){
+        system("clear");
+        printf("--- DESAFIO ---\n");
+        printf("EBADF.. abrelo y verás\n");
+        bzero(buff, SIZE); 
+        
+        // read the message from client and copy it in buffer 
+        int last = recv(sockfd, buff, SIZE, 0);
+
+        // print buffer which contains the client contents 
+        //printf("%s\n", buff);
+        
+        if(strcmp(buff,"cabeza de calabaza\n") == 0){
+            printf("Respuesta correcta: %s\n", buff);
+            sleep(1);
+            challenge3(sockfd);
+            break;
+        }
+
+        else{
+            printf("Respuesta incorrecta: %s\n", buff);
+            sleep(1);
+            system("clear");
+        }
+    }
+}
+
+void challenge3(int sockfd){
+    char * buff = malloc(1024);
+
+    while(1){
+        system("clear");
+        printf("--- DESAFIO ---\n");
+        printf(".data .bss .comment ? .shstrtab .symtab .strtab\n");
+        bzero(buff, SIZE); 
+        
+        // read the message from client and copy it in buffer 
+        int last = recv(sockfd, buff, SIZE, 0);
+
+        // print buffer which contains the client contents 
+        //printf("%s\n", buff);
+        
+        if(strcmp(buff,".runme\n") == 0){
+            printf("Respuesta correcta: %s\n", buff);
+            sleep(1);
+            challenge4(sockfd);
+            break;
+        }
+
+        else{
+            printf("Respuesta incorrecta: %s\n", buff);
+            sleep(1);
+            system("clear");
+        }
+    }
+}
+
+void challenge4(int sockfd){
+    char * buff = malloc(1024);
+
+    while(1){
+        system("clear");
+        printf("--- DESAFIO ---\n");
+        printf("respuesta = strings[HAY QUE PONER EL INDICE CORRECTO]\n");
+        bzero(buff, SIZE); 
+        
+        // read the message from client and copy it in buffer 
+        int last = recv(sockfd, buff, SIZE, 0);
+
+        // print buffer which contains the client contents 
+        //printf("%s\n", buff);
+        
+        if(strcmp(buff,"easter_egg\n") == 0){
+            printf("Respuesta correcta: %s\n", buff);
+            sleep(1);
+            mixedfds(sockfd);
+            break;
+        }
+
+        else{
+            printf("Respuesta incorrecta: %s\n", buff);
+            sleep(1);
+            system("clear");
+        }
+    }
+}
+
+//me gustaría que se pueda leer una cantidad azarosa pero no tengo time
+void mixedfds(int sockfd){
+    char * buff = malloc(1024);
+    char * str1 = "la respuesta es indeterminado";
+    char * str2 = "bolaenlaingledenlemildolaresaesehombreyaganoelconcursomegustaestetpesbastanteentetenido";
+    char * str = malloc(1024);
+    int i, j, k;
+
+    for(i = 0; i < 100; i++){
+        for(j = 0; j < 100; j++){
+
+        }
+    }
+
+    
+
+    while(1){
+        system("clear");
+        printf("--- DESAFIO ---\n");
+        printf("%s\n", str);
+        bzero(buff, SIZE); 
+        
+        // read the message from client and copy it in buffer 
+        int last = recv(sockfd, buff, SIZE, 0);
+
+        // print buffer which contains the client contents 
+        //printf("%s\n", buff);
+        
+        if(strcmp(buff,"indeterminado\n") == 0){
+            printf("Respuesta correcta: %s\n", buff);
+            sleep(1);
+            challenge5(sockfd);
+            break;
+        }
+
+        else{
+            printf("Respuesta incorrecta: %s\n", buff);
+            sleep(1);
+            system("clear");
+        }
+    }
+}
+
+void challenge5(int sockfd){
+    char * buff = malloc(1024);
+
+    while(1){
+        system("clear");
+        printf("--- DESAFIO ---\n");
+        printf("Tango Hotel India Sierra India Sierra Alfa Whiskey Echo Sierra Oscar Mike Echo\n");
+        bzero(buff, SIZE); 
+        
+        // read the message from client and copy it in buffer 
+        int last = recv(sockfd, buff, SIZE, 0);
+
+        // print buffer which contains the client contents 
+        //printf("%s\n", buff);
+        
+        if(strcmp(buff,"this is awesome\n") == 0){
+            printf("Respuesta correcta: %s\n", buff);
+            sleep(1);
+            challengex(sockfd);
+            break;
+        }
+
+        else{
+            printf("Respuesta incorrecta: %s\n", buff);
+            sleep(1);
+            system("clear");
+        }
+    }
+}
+
+
 void challengex(int sockfd){
-
-
-
         printf("Este es el de quine amigo\n" ); 
 
         int num = system("gcc quine.c -o quine");
@@ -153,18 +386,78 @@ void challengex(int sockfd){
             }
             else{
                 printf("Ganaste\n" );
+                challenge6(sockfd);
             }
         }
         else{
             printf("Perdiste\n");
+        }    
+}
+
+
+void challenge6(int sockfd){
+    char * buff = malloc(1024);
+    int i;
+
+    while(1){
+        i = 12345;
+        system("clear");
+        printf("--- DESAFIO ---\n");
+        printf("b gdbme y encontrá el valor mágico\n");
+        bzero(buff, SIZE); 
+        
+        // read the message from client and copy it in buffer
+        if(i == 0){
+            printf("la respuesta es gdb rules\n");
         }
 
+        int last = recv(sockfd, buff, SIZE, 0);
 
-    //}
-
+        // print buffer which contains the client contents 
+        //printf("%s\n", buff);
         
- 
+        if(strcmp(buff,"gdb rules\n") == 0){
+            printf("Respuesta correcta: %s\n", buff);
+            sleep(1);
+            challengex(sockfd);
+            break;
+        }
 
-
-        
+        else{
+            printf("Respuesta incorrecta: %s\n", buff);
+            sleep(1);
+            system("clear");
+        }
+    }
 }
+
+void challenge7(int sockfd){
+    char * buff = malloc(1024);
+
+    while(1){
+        system("clear");
+        printf("--- DESAFIO ---\n");
+        printf("/lib/x86_64-linux-gnu/libc-2.19.so ?\n");
+        bzero(buff, SIZE); 
+        
+        // read the message from client and copy it in buffer 
+        int last = recv(sockfd, buff, SIZE, 0);
+
+        // print buffer which contains the client contents 
+        //printf("%s\n", buff);
+        
+        if(strcmp(buff,"/lib/x86_64-linux-gnu/ld-2.19.so\n") == 0){
+            printf("Respuesta correcta: %s\n", buff);
+            sleep(1);
+            challengex(sockfd);
+            break;
+        }
+
+        else{
+            printf("Respuesta incorrecta: %s\n", buff);
+            sleep(1);
+            system("clear");
+        }
+    }
+}
+
