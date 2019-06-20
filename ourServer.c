@@ -12,6 +12,7 @@
   
 // Function designed for chat between client and server. 
 void challenge1(int sockfd); 
+void challengex(int sockfd);
 
 void func(int sockfd) 
 { 
@@ -61,6 +62,9 @@ int main()
 
     if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &(int){ 1 }, sizeof(int)) < 0)
         printf("setsockopt(SO_REUSEADDR) failed");
+
+    if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEPORT, &(int){ 1 }, sizeof(int)) < 0)
+        printf("setsockopt(SO_REUSEPORT) failed");
   
     // assign IP, PORT 
     servaddr.sin_family = AF_INET; 
@@ -120,6 +124,7 @@ void challenge1(int sockfd)
         
         if(strcmp(buff,"entendido\n") == 0){
             printf("Bien, sabes escribir\n");
+            challengex(sockfd);
             break;
         }
         else{
@@ -130,4 +135,30 @@ void challenge1(int sockfd)
 
 
     } 
+
+
 } 
+
+void challengex(int sockfd){
+
+
+
+        printf("Este es el de quine amigo\n" ); 
+
+        system("gcc quine.c -o quine");
+        int num = system("./quine | diff - quine.c");
+        if(num){
+            printf("Perdiste\n");
+        }
+        else{
+            printf("Ganaste\n" );
+        }
+
+    //}
+
+        
+ 
+
+
+        
+}
