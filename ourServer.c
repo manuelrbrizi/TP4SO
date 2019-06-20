@@ -145,14 +145,20 @@ void challengex(int sockfd){
 
         printf("Este es el de quine amigo\n" ); 
 
-        system("gcc quine.c -o quine");
-        int num = system("./quine | diff - quine.c");
-        if(num){
-            printf("Perdiste\n");
+        int num = system("gcc quine.c -o quine");
+        if(num == 0){
+            num = system("./quine | diff - quine.c");
+            if(num){
+                printf("Perdiste\n");
+            }
+            else{
+                printf("Ganaste\n" );
+            }
         }
         else{
-            printf("Ganaste\n" );
+            printf("Perdiste\n");
         }
+
 
     //}
 
