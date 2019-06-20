@@ -1,0 +1,11 @@
+void challenge1(int sockfd); 
+void challenge2(int sockfd);
+void challenge3(int sockfd);
+void challenge4(int sockfd); 
+void challenge5(int sockfd);
+void challenge6(int sockfd);
+void challenge7(int sockfd);
+void challenge8(int sockfd); 
+void challenge9(int sockfd);
+void challenge10(int sockfd);
+void challenge11(int sockfd);

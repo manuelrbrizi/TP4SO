@@ -58,22 +58,22 @@ int main(int argc, char const *argv[])
     //printf("%s\n",buff);
     //free(buff);
 
-// 	write(sock , "entendido\n" , 10);
-//     sleep(1);
-//         write(sock , "#0854780*\n" ,10 );
-//     sleep(1);
+	// write(sock , "entendido\n" , 10);
+ //    sleep(1);
+ //        write(sock , "#0854780*\n" ,10 );
+ //    sleep(1);
 
-//     write(sock , "nokia\n" , 6);
-//     sleep(1);
+ //    write(sock , "nokia\n" , 6);
+ //    sleep(1);
 
-//     write(sock , "cabeza de calabaza\n" , 19);
-//         sleep(1);
+    // write(sock , "cabeza de calabaza\n" , 19);
+    //     sleep(1);
 
-//     write(sock , "easter_egg\n" , 11);
-//     sleep(1);
+    // write(sock , "easter_egg\n" , 11);
+    // sleep(1);
 
-//     write(sock , ".runme\n" , 7);
-//     sleep(1);
+    // write(sock , ".runme\n" , 7);
+    // sleep(1);
 
 //     write(sock , "indeterminado\n" , 14);
 //     sleep(1);
