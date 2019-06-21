@@ -12,7 +12,7 @@
 
 char * des = "--- DESAFIO ---\n";
 
-
+// Challenge entendido\n
 void challenge1(int sockfd) 
 { 
     char * buff = malloc(1024);
@@ -37,6 +37,7 @@ void challenge1(int sockfd)
     } 
 } 
 
+//Challenge Telefono
 void challenge2(int sockfd){
     char * buff = malloc(1024);
     
@@ -47,11 +48,8 @@ void challenge2(int sockfd){
         printf("%s",str);
         bzero(buff, SIZE); 
         
-        // read the message from client and copy it in buffer 
         int last = recv(sockfd, buff, SIZE, 0);
 
-        // print buffer which contains the client contents 
-        //printf("%s\n", buff);
         
         if(strcmp(buff,"#0854780*\n") == 0){
             printf("Respuesta correcta: %s\n", buff);
@@ -66,6 +64,7 @@ void challenge2(int sockfd){
     }
 }
 
+//Challenge nokia
 void challenge3(int sockfd){
     char * buff = malloc(1024);
     
@@ -94,17 +93,15 @@ void challenge3(int sockfd){
     }
 }
 
-void challenge4(int sockfd){ //EBADF
+//Challenge EBADF
+void challenge4(int sockfd){ 
         system("clear");
 
     char * str = "easter_egg";
     char * buff = malloc(1024);
 
-    write(5, "cabeza de calabaza\n", 20);
-
-  
+    write(5, "La respuesta a este desafio es cabeza de calabaza\n", 51);
     
-
     while(1){
 
         printf("--- DESAFIO ---\n");
@@ -128,7 +125,7 @@ void challenge4(int sockfd){ //EBADF
     }
 }
 
-
+//Challenge .runme
 void challenge5(int sockfd){
     char * buff = malloc(1024);
 
@@ -156,6 +153,7 @@ void challenge5(int sockfd){
     }
 }
 
+//Challenge easter_egg
 void challenge6(int sockfd){
     char * buff = malloc(1024);
 
@@ -182,8 +180,8 @@ void challenge6(int sockfd){
     }
 }
 
-//me gustaría que se pueda leer una cantidad azarosa pero no tengo time
-void challenge7(int sockfd){ //mixed fds
+//Challenge mixed fds
+void challenge7(int sockfd){
     char * str = "la respuesta a este acertijo es indeterminado\0";
     char * letras = "abcdefghijklmnopqrstuvwxyz\0";
     int pos = 0;
@@ -232,6 +230,7 @@ void challenge7(int sockfd){ //mixed fds
 
 }
 
+//Challenge this is awesome
 void challenge8(int sockfd){
     char * buff = malloc(1024);
 
@@ -257,12 +256,12 @@ void challenge8(int sockfd){
     }
 }
 
+//Challenge quine
+void challenge9(int sockfd){
+        printf("Desafio\n" ); 
 
-void challenge9(int sockfd){ ///Quine
-        printf("Este es el de quine amigo\n" ); 
-
-        //int num = system("gcc quine.c -o quine 2>&1");
-        int num = system("gcc quine.c -o quine");
+        //int num = system("gcc quine.c -o quine 2>&1");    //Como el de mixed fds redireccionas la stderr esto es como para que no desaparezca
+        int num = system("gcc quine.c -o quine");           //Si tenes redireccionado stderr no vas a ver el error de gcc, asi funciona el server original
 
         if(num == 0){
             printf("Bien, pudiste meter codigo!\n");
@@ -282,8 +281,8 @@ void challenge9(int sockfd){ ///Quine
         while(1);    
 }
 
-
-void challenge10(int sockfd){
+//Challenge gdb
+void gdbme(int sockfd){
     char * buff = malloc(1024);
     int i;
 
@@ -314,6 +313,7 @@ void challenge10(int sockfd){
     }
 }
 
+//Challenge /lib
 void challenge11(int sockfd){
     char * buff = malloc(1024);
 

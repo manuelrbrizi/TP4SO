@@ -9,25 +9,19 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <errno.h>
-       #include <sys/types.h>
-       #include <sys/stat.h>
-       #include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 #define PORT 23423 
+#define SIZE 1024
 
-void clear_msg(char msg[1024]){
-    for(int i = 0;i<1024;i++){
-        msg[i] = '\0';
-    }
-}
-   
+
 int main(int argc, char const *argv[]) 
 { 
     int sock = 0, valread; 
     struct sockaddr_in serv_addr; 
-    char *hello = "entendido\n"; 
-    char buffer[1024] = {0}; 
-    char msg[1024] = {0};
+    char msg[SIZE] = {0};
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) 
     { 
         printf("\n Socket creation error \n"); 
@@ -52,22 +46,19 @@ int main(int argc, char const *argv[])
     int i=0;
     char c;
 
-    //char * buff = malloc(1024);
-    //read(9,buff,1024);
+    //Responde a todas las preguntas del servidor automaticamente
 
-    //printf("%s\n",buff);
-    //free(buff);
+    // write(sock , "entendido\n" , 10);
+    // sleep(1);
 
-	// write(sock , "entendido\n" , 10);
- //    sleep(1);
- //        write(sock , "#0854780*\n" ,10 );
- //    sleep(1);
+    // write(sock , "#0854780*\n" ,10 );
+    // sleep(1);
 
- //    write(sock , "nokia\n" , 6);
- //    sleep(1);
+    // write(sock , "nokia\n" , 6);
+    // sleep(1);
 
     // write(sock , "cabeza de calabaza\n" , 19);
-    //     sleep(1);
+    // sleep(1);
 
     // write(sock , "easter_egg\n" , 11);
     // sleep(1);
@@ -75,16 +66,19 @@ int main(int argc, char const *argv[])
     // write(sock , ".runme\n" , 7);
     // sleep(1);
 
-//     write(sock , "indeterminado\n" , 14);
-//     sleep(1);
+    // write(sock , "indeterminado\n" , 14);
+    // sleep(1);
 
-//     write(sock , "this is awesome\n" , 16);
-//     sleep(1);
-//     write(sock , "cachiporra\n" , 11);
-// sleep(1);
-//     write(sock , "gdb rules\n" , 10);
-// sleep(1);
-//     write(sock , "/lib/x86_64-linux-gnu/ld-2.19.so\n" , 33);
+    // write(sock , "this is awesome\n" , 16);
+    // sleep(1);
+
+    // write(sock , "cachiporra\n" , 11);
+    // sleep(1);
+
+    // write(sock , "gdb rules\n" , 10);
+    // sleep(1);
+
+    // write(sock , "/lib/x86_64-linux-gnu/ld-2.19.so\n" , 33);
 
 
 
@@ -100,8 +94,7 @@ int main(int argc, char const *argv[])
         msg[i] = '\n';
         write(sock , msg , strlen(msg));
 	
- 	//printf("%s",buff);
-        clear_msg(msg);
+        bzero(msg,SIZE);
 
     }
 

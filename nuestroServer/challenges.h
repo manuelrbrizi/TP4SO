@@ -7,5 +7,5 @@ void challenge6(int sockfd);
 void challenge7(int sockfd);
 void challenge8(int sockfd); 
 void challenge9(int sockfd);
-void challenge10(int sockfd);
+void gdbme(int sockfd);
 void challenge11(int sockfd);

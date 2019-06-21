@@ -32,18 +32,23 @@ int main()
     // socket create and verification 
     sockfd = socket(AF_INET, SOCK_STREAM, 0); 
     if (sockfd == -1) { 
-        printf("socket creation failed...\n"); 
+        //printf("socket creation failed...\n");                        // Print para debuggear
         exit(0); 
     } 
-    else
-        printf("Socket successfully created..\n"); 
+    else{
+        printf("Socket successfully created..\n");                      // Print para debuggear
+    }
     bzero(&servaddr, sizeof(servaddr)); 
 
-    if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &(int){ 1 }, sizeof(int)) < 0)
-        printf("setsockopt(SO_REUSEADDR) failed");
+    // Setteo de opciones para que el server se pueda volver a levantar cuando se cierra mal
+    // Tambien te deja tener varios servers abiertos al mismo tiempo
+    if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &(int){ 1 }, sizeof(int)) < 0){
+        //printf("setsockopt(SO_REUSEADDR) failed");                    // Print para debuggear
+    }
 
-    if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEPORT, &(int){ 1 }, sizeof(int)) < 0)
-        printf("setsockopt(SO_REUSEPORT) failed");
+    if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEPORT, &(int){ 1 }, sizeof(int)) < 0){
+        //printf("setsockopt(SO_REUSEPORT) failed");                    // Print para debuggear
+    }
   
     // assign IP, PORT 
     servaddr.sin_family = AF_INET; 
@@ -52,56 +57,54 @@ int main()
   
     // Binding newly created socket to given IP and verification 
     if ((bind(sockfd, (SA*)&servaddr, sizeof(servaddr))) != 0) { 
-        printf("socket bind failed...\n"); 
+        //printf("socket bind failed...\n");                            // Print para debuggear
         exit(0); 
     } 
-    else
-        printf("Socket successfully binded..\n"); 
+    else{
+        //printf("Socket successfully binded..\n");                     // Print para debuggear
+    }
   
     // Now server is ready to listen and verification 
     if ((listen(sockfd, 5)) != 0) { 
-        printf("Listen failed...\n"); 
+        //printf("Listen failed...\n");                                 // Print para debuggear
         exit(0); 
     } 
-    else
-        printf("Server listening..\n"); 
+    else{
+        //printf("Server listening..\n");                               // Print para debuggear
+    }
     len = sizeof(cli); 
   
     // Accept the data packet from client and verification 
     connfd = accept(sockfd, (SA*)&cli, &len); 
     if (connfd < 0) { 
-        printf("server acccept failed...\n"); 
+        //printf("server acccept failed...\n");                         // Print para debuggear
         exit(0); 
     } 
-    
-        //printf("server acccept the client...\n"); 
-  
-    // Function for chatting between client and server 
-    //func(connfd); 
-    // challenge1(connfd);
 
-    // challenge2(connfd);
+    challenge1(connfd);
 
-    // challenge3(connfd);
- //   challenge4(connfd);
+    challenge2(connfd);
 
-   // challenge5(connfd);
+    challenge3(connfd);
 
-    //challenge6(connfd);
+    challenge4(connfd);
 
-    //challenge7(connfd);
+    challenge5(connfd);
 
-    //challenge8(connfd);
+    challenge6(connfd);
+
+    challenge7(connfd);
+
+    challenge8(connfd);
 
     challenge9(connfd);
 
-    challenge10(connfd);
+    gdbme(connfd);
 
     challenge11(connfd);
 
 
   
-    // After chatting close the socket 
     close(sockfd); 
 } 
 
