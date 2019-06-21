@@ -11,8 +11,6 @@
 #define PORT 23423 
 #define SIZE 1024
 #define SA struct sockaddr 
-  
-// Function designed for chat between client and server. 
 
 char * data = ".data";
 char * bss = ".bss";
@@ -22,10 +20,7 @@ char * shstrtab = ".shstrtab";
 char * symtab = ".symtab";
 char * strtab = ".strtab";
 
-  
-// Gracias por tanto Geeks for Geeks
-int main() 
-{ 
+int main(){ 
     int sockfd, connfd, len; 
     struct sockaddr_in servaddr, cli; 
   
@@ -50,7 +45,7 @@ int main()
         //printf("setsockopt(SO_REUSEPORT) failed");                    // Print para debuggear
     }
   
-    // assign IP, PORT 
+    // Assign IP, PORT 
     servaddr.sin_family = AF_INET; 
     servaddr.sin_addr.s_addr = htonl(INADDR_ANY); 
     servaddr.sin_port = htons(PORT); 

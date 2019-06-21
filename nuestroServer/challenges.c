@@ -8,9 +8,12 @@
 #include <unistd.h>
 #include "challenges.h"
 #include <errno.h>
+
 #define SIZE 1024
 
 char * des = "--- DESAFIO ---\n";
+char * res = "Respuesta correcta:";
+char * inc = "Respuesta incorrecta:";
 
 // Challenge entendido\n
 void challenge1(int sockfd) 
@@ -19,18 +22,19 @@ void challenge1(int sockfd)
     int n; 
     while(1){ 
         system("clear");
-        printf("Bienvenidos al Himalaya, pone \"entendido\\n\" porque se pudre\n" ); 
+        printf("Bienvenidos al Himalaya, escribi \"entendido\\n\" y conoce tu destino\n" ); 
         bzero(buff, SIZE); 
         
         int last = recv(sockfd, buff, SIZE,0);
 
         if(strcmp(buff,"entendido\n") == 0){
-            printf("Respuesta correcta: %s\n",buff);
+            printf("%s %s\n", res, buff);
             sleep(1);
             return;
         }
+
         else{
-            printf("Respuesta incorrecta: %s\n",buff);
+            printf("%s %s\n", inc, buff);
             sleep(1);
             system("clear");
         }
@@ -43,21 +47,20 @@ void challenge2(int sockfd){
     
     while(1){ 
         system("clear");
-        printf("%s",des);
+        printf("%s", des);
         char * str = "# [D \\033[A \\033[A \\033[D \\033[B \\033[C \\033[B \\033[D *\n";
-        printf("%s",str);
+        printf("%s", str);
         bzero(buff, SIZE); 
         
         int last = recv(sockfd, buff, SIZE, 0);
 
-        
         if(strcmp(buff,"#0854780*\n") == 0){
-            printf("Respuesta correcta: %s\n", buff);
+            printf("%s %s\n", res, buff);
             sleep(1);
             return;
         }
         else{
-            printf("Respuesta incorrecta: %s\n", buff);
+            printf("%s %s\n", inc, buff);
             sleep(1);
             system("clear");
         }
@@ -70,23 +73,20 @@ void challenge3(int sockfd){
     
     while(1){
         system("clear"); 
-        printf("--- DESAFIO ---\n");
+        printf("%s", des);
         printf("https://vocaroo.com/i/s19015zmR4t8\n");
         bzero(buff, SIZE); 
         
-        // read the message from client and copy it in buffer 
         int last = recv(sockfd, buff, SIZE, 0);
-
-        // print buffer which contains the client contents 
-        //printf("%s\n", buff);
         
-        if(strcmp(buff,"nokia\n") == 0){
-            printf("Respuesta correcta: %s\n", buff);
+        if(strcmp(buff, "nokia\n") == 0){
+            printf("%s %s\n", res, buff);
             sleep(1);
             return;
         }
+
         else{
-            printf("Respuesta incorrecta: %s\n", buff);
+            printf("%s %s\n", inc, buff);
             sleep(1);
             system("clear");
         }
@@ -95,30 +95,26 @@ void challenge3(int sockfd){
 
 //Challenge EBADF
 void challenge4(int sockfd){ 
-        system("clear");
-
+    system("clear");
     char * str = "easter_egg";
     char * buff = malloc(1024);
-
     write(5, "La respuesta a este desafio es cabeza de calabaza\n", 51);
     
     while(1){
-
-        printf("--- DESAFIO ---\n");
+        printf("%s", des);
         printf("EBADF.. abrelo y verás\n");
         bzero(buff, SIZE); 
         
         int last = recv(sockfd, buff, SIZE, 0);
 
-        
-        if(strcmp(buff,"cabeza de calabaza\n") == 0){
-            printf("Respuesta correcta: %s\n", buff);
+        if(strcmp(buff, "cabeza de calabaza\n") == 0){
+            printf("%s %s\n", res, buff);
             sleep(1);
             return;
         }
 
         else{
-            printf("Respuesta incorrecta: %s\n", buff);
+            printf("%s %s\n", inc, buff);
             sleep(1);
             system("clear");
         }
@@ -131,22 +127,20 @@ void challenge5(int sockfd){
 
     while(1){
         system("clear");
-        printf("--- DESAFIO ---\n");
+        printf("%s", des);
         printf(".data .bss .comment ? .shstrtab .symtab .strtab\n");
         bzero(buff, SIZE); 
         
         int last = recv(sockfd, buff, SIZE, 0);
 
-
-        
         if(strcmp(buff,".runme\n") == 0){
-            printf("Respuesta correcta: %s\n", buff);
+            printf("%s %s\n", res, buff);
             sleep(1);
             return;
         }
 
         else{
-            printf("Respuesta incorrecta: %s\n", buff);
+            printf("%s %s\n", inc, buff);
             sleep(1);
             system("clear");
         }
@@ -159,21 +153,20 @@ void challenge6(int sockfd){
 
     while(1){
         system("clear");
-        printf("--- DESAFIO ---\n");
-        printf("respuesta = strings[HAY QUE PONER EL INDICE CORRECTO]\n");
+        printf("%s", des);
+        printf("respuesta = strings[64]\n");
         bzero(buff, SIZE); 
         
         int last = recv(sockfd, buff, SIZE, 0);
 
-        
-        if(strcmp(buff,"easter_egg\n") == 0){
-            printf("Respuesta correcta: %s\n", buff);
+        if(strcmp(buff, "easter_egg\n") == 0){
+            printf("%s %s\n", res, buff);
             sleep(1);
             return;
         }
 
         else{
-            printf("Respuesta incorrecta: %s\n", buff);
+            printf("%s %s\n", inc, buff);
             sleep(1);
             system("clear");
         }
@@ -187,47 +180,42 @@ void challenge7(int sockfd){
     int pos = 0;
     int opt = rand()%4;
     int ran = rand()%26;
-    char * buff =malloc(1);
+    char * buff = malloc(1);
     system("clear");
     
     while(1){
-
+        printf("%s", des);
+        printf("mixed fds\n");
         while(pos < strlen(str)){
 
             if(opt == 0){
-                write(1,str+pos,1);
+                write(1, str+pos, 1);
                 pos++;
             }
+
             else{
-                write(2,letras+ran,1);
+                write(2, letras+ran, 1);
             }
 
             opt = rand()%4;
             ran = rand()%26;
-
         }
-        printf("\n");
 
+        printf("\n");
         int last = recv(sockfd, buff, SIZE, 0);
 
-        
-        if(strcmp(buff,"indeterminado\n") == 0){
-            printf("Respuesta correcta: %s\n", buff);
+        if(strcmp(buff, "indeterminado\n") == 0){
+            printf("%s %s\n", res, buff);
             sleep(1);
             return;
         }
 
         else{
-            printf("Respuesta incorrecta: %s\n", buff);
+            printf("%s %s\n", inc, buff);
             sleep(1);
             system("clear");
         }
-
-
     }
-
-
-
 }
 
 //Challenge this is awesome
@@ -236,20 +224,20 @@ void challenge8(int sockfd){
 
     while(1){
         system("clear");
-        printf("--- DESAFIO ---\n");
+        printf("%s", des);
         printf("Tango Hotel India Sierra India Sierra Alfa Whiskey Echo Sierra Oscar Mike Echo\n");
         bzero(buff, SIZE); 
         
         int last = recv(sockfd, buff, SIZE, 0);
         
         if(strcmp(buff,"this is awesome\n") == 0){
-            printf("Respuesta correcta: %s\n", buff);
+            printf("%s %s\n", res, buff);
             sleep(1);
             return;
         }
 
         else{
-            printf("Respuesta incorrecta: %s\n", buff);
+            printf("%s %s\n", inc, buff);
             sleep(1);
             system("clear");
         }
@@ -258,27 +246,28 @@ void challenge8(int sockfd){
 
 //Challenge quine
 void challenge9(int sockfd){
-        printf("Desafio\n" ); 
+    system("clear");
+    printf("%s", des); 
 
-        //int num = system("gcc quine.c -o quine 2>&1");    //Como el de mixed fds redireccionas la stderr esto es como para que no desaparezca
-        int num = system("gcc quine.c -o quine");           //Si tenes redireccionado stderr no vas a ver el error de gcc, asi funciona el server original
+    //int num = system("gcc quine.c -o quine 2>&1");    //Como el de mixed fds redireccionas la stderr esto es como para que no desaparezca
+    int num = system("gcc quine.c -o quine");           //Si tenes redireccionado stderr no vas a ver el error de gcc, asi funciona el server original
 
-        if(num == 0){
-            printf("Bien, pudiste meter codigo!\n");
-            num = system("./quine | diff - quine.c");
-            if(num){
-                printf("Perdiste\n");
-            }
-            else{
-                printf("Ganaste\n" );
-                sleep(1);
-                return;
-            }
-        }
-        else{
+    if(num == 0){
+        printf("Bien, pudiste meter codigo!\n");
+        num = system("./quine | diff - quine.c");
+        if(num){
             printf("Perdiste\n");
         }
-        while(1);    
+        else{
+            printf("Ganaste\n" );
+            sleep(1);
+            return;
+        }
+    }
+    else{
+        printf("Perdiste\n");
+    }
+    while(1);    
 }
 
 //Challenge gdb
@@ -289,7 +278,7 @@ void gdbme(int sockfd){
     while(1){
         i = 12345;
         system("clear");
-        printf("--- DESAFIO ---\n");
+        printf("%s", des);
         printf("b gdbme y encontrá el valor mágico\n");
         bzero(buff, SIZE); 
         
@@ -300,13 +289,13 @@ void gdbme(int sockfd){
         int last = recv(sockfd, buff, SIZE, 0);
         
         if(strcmp(buff,"gdb rules\n") == 0){
-            printf("Respuesta correcta: %s\n", buff);
+            printf("%s %s\n", res, buff);
             sleep(1);
             return;
         }
 
         else{
-            printf("Respuesta incorrecta: %s\n", buff);
+            printf("%s %s\n", inc, buff);
             sleep(1);
             system("clear");
         }
@@ -319,7 +308,7 @@ void challenge11(int sockfd){
 
     while(1){
         system("clear");
-        printf("--- DESAFIO ---\n");
+        printf("%s", des);
         printf("/lib/x86_64-linux-gnu/libc-2.19.so ?\n");
         bzero(buff, SIZE); 
         
@@ -328,13 +317,13 @@ void challenge11(int sockfd){
 
         
         if(strcmp(buff,"/lib/x86_64-linux-gnu/ld-2.19.so\n") == 0){
-            printf("Respuesta correcta: %s\n", buff);
+            printf("%s %s\n", res, buff);
             sleep(1);
             return;
         }
 
         else{
-            printf("Respuesta incorrecta: %s\n", buff);
+            printf("%s %s\n", inc, buff);
             sleep(1);
             system("clear");
         }

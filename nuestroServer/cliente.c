@@ -10,9 +10,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+
 #define PORT 23423 
 #define SIZE 1024
-
 
 //Fuertemente inspirado en Geeks for Geeks
 int main(int argc, char const *argv[]) 
@@ -45,6 +45,7 @@ int main(int argc, char const *argv[])
         printf("\nConnection Failed \n"); 
         return -1; 
     }
+
     int i=0;
     char c;
 
@@ -83,19 +84,17 @@ int main(int argc, char const *argv[])
 
     // write(sock , "/lib/x86_64-linux-gnu/ld-2.19.so\n" , 33);
 
-
-
-
     while(1){
-        i=0;
+        i = 0;
+        
         while((c = getchar()) != '\n'){
             msg[i] = c;
             i++;
         }
+
         msg[i] = '\n';
         write(sock , msg , strlen(msg));
         bzero(msg,1024);
-
     }
 
     return 0; 
