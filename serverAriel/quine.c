@@ -7,7 +7,7 @@
        FILE *fp;
      
      
-       fp = fopen("/home/fede/Desktop/quine.c", "r"); // read mode
+       fp = fopen("quine.c", "r"); // read mode
      
        if (fp == NULL)
        {

@@ -154,7 +154,7 @@ void challenge6(int sockfd){
     while(1){
         system("clear");
         printf("%s", des);
-        printf("respuesta = strings[64]\n");
+        printf("respuesta = strings[57]\n");
         bzero(buff, SIZE); 
         
         int last = recv(sockfd, buff, SIZE, 0);
@@ -251,23 +251,32 @@ void challenge9(int sockfd){
 
     //int num = system("gcc quine.c -o quine 2>&1");    //Como el de mixed fds redireccionas la stderr esto es como para que no desaparezca
     int num = system("gcc quine.c -o quine");           //Si tenes redireccionado stderr no vas a ver el error de gcc, asi funciona el server original
-
+    // Medio polemico, se podria redireccionar la salida del comando a un archivo y chequear la salida, pero esto parece funcionar y es mucho mas sencillo
     if(num == 0){
         printf("Bien, pudiste meter codigo!\n");
         num = system("./quine | diff - quine.c");
         if(num){
-            printf("Perdiste\n");
+            printf("Proba de nuevo\n");
         }
         else{
-            printf("Ganaste\n" );
-            sleep(1);
-            return;
+            printf("La respuesta a este acertijo es cachiporra\n" );
         }
     }
     else{
-        printf("Perdiste\n");
+        printf("Proba de nuevo\n");
     }
-    while(1);    
+        char * buff = malloc(1024);
+
+    while(1){
+        recv(sockfd, buff, SIZE, 0);
+        if(strcmp(buff,"cachiporra\n") == 0){
+            printf("%s %s\n",res,buff );
+        }
+        else{
+            printf("%s %s\n",inc,buff );
+        }
+        bzero(buff,SIZE);
+    }    
 }
 
 //Challenge gdb

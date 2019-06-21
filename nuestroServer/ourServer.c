@@ -31,7 +31,7 @@ int main(){
         exit(0); 
     } 
     else{
-        printf("Socket successfully created..\n");                      // Print para debuggear
+        //printf("Socket successfully created..\n");                      // Print para debuggear
     }
     bzero(&servaddr, sizeof(servaddr)); 
 
@@ -84,9 +84,9 @@ int main(){
 
     challenge4(connfd);
 
-    challenge5(connfd);
-
     challenge6(connfd);
+
+    challenge5(connfd);
 
     challenge7(connfd);
 
